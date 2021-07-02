@@ -4,6 +4,7 @@ import {calculateWinner} from './Helper'
 
 import './Board.css'
 
+
 const Board = () => {
 
     const [square, setSquare] = useState(Array(9).fill(null));
@@ -12,13 +13,26 @@ const Board = () => {
 
     const winner = calculateWinner(square);
     let status;
+    let status1;
+
     if (winner) {
-        status = 'winner ' + winner;
-    }else if (winner === null) {
-        status = 'There has been a draw';
+        status1 = winner + ' winner';
     }else {
-        status = (x ? 'X' : 'O') + 'Turn';
+        status1 = 'XO Draw';
     }
+
+
+    if (!winner) {
+        status = (x ? 'X ' : 'O ') + 'Turn';
+    }else{
+        status = 'Game over';
+    }
+    
+    const restartClick = (square) => {
+        const squares = square;
+        setSquare(squares);
+    }
+
 
     const hasClick = (i) => {
         //using the slice function to get the value in the array and assign it to a variable squares
@@ -66,6 +80,15 @@ const Board = () => {
                     {renderSquare(6)}
                     {renderSquare(7)}
                     {renderSquare(8)}
+                </div>
+                <div className="status">
+                    <button className="btn__clear"
+                    onClick = {()=>restartClick(square)}>
+                        Restart Game
+                    </button>
+                </div>
+                <div className="winBox">
+                    {status1}
                 </div>
             </div>
         </>
