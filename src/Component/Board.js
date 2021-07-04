@@ -15,24 +15,21 @@ const Board = () => {
     let status;
     let status1;
 
+    if (!winner) {
+        status = (x ? 'X ' : 'O ') + 'Turn';
+    }else{
+        status = 'Game over';
+    }
+
     if (winner) {
         status1 = winner + ' winner';
     }else {
         status1 = 'XO Draw';
     }
 
-
-    if (!winner) {
-        status = (x ? 'X ' : 'O ') + 'Turn';
-    }else{
-        status = 'Game over';
+    if (winner === null) {
+        status1 = 'No one Win Yet'
     }
-    
-    const restartClick = (square) => {
-        const squares = square;
-        setSquare(squares);
-    }
-
 
     const hasClick = (i) => {
         //using the slice function to get the value in the array and assign it to a variable squares
@@ -46,6 +43,10 @@ const Board = () => {
             setX(!x) // next value should not be an "X"
         }else{
             alert("Sorry can't change option")
+        }
+
+        if (status1 === winner) {
+            alert('No move can be done')
         }
 
         //console.log(i)
@@ -83,7 +84,7 @@ const Board = () => {
                 </div>
                 <div className="status">
                     <button className="btn__clear"
-                    onClick = {()=>restartClick(square)}>
+                    onClick = {()=>setSquare(Array(9).fill(null))}>
                         Restart Game
                     </button>
                 </div>
