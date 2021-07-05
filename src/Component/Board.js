@@ -28,7 +28,7 @@ const Board = () => {
     }
 
     if (winner === null) {
-        status1 = 'No one Win Yet'
+        status1 = ' '
     }
 
     const hasClick = (i) => {
@@ -61,6 +61,10 @@ const Board = () => {
         )
     }
 
+    function restart() {
+        window.location.reload();
+      }
+
     return (
         <>
             <div className ="board__container">
@@ -84,7 +88,7 @@ const Board = () => {
                 </div>
                 <div className="status">
                     <button className="btn__clear"
-                    onClick = {()=>setSquare(Array(9).fill(null))}>
+                    onClick = {restart}>
                         Restart Game
                     </button>
                 </div>
